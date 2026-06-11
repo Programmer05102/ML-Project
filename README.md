@@ -177,7 +177,7 @@ to quit.
 ### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/object-recognition-knn.git
+git clone https://github.com/yourusername/ML-Project.git
 
 cd object-recognition-knn
 ```
