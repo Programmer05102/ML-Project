@@ -1,188 +1,223 @@
-# 🧠 AI Object Recognition using KNN, HOG & PCA
+# 🧠 AI Object Recognition System using KNN, HOG & PCA
 
-A lightweight real-time object recognition system built with Python, OpenCV, HOG feature extraction, PCA dimensionality reduction, and K-Nearest Neighbors (KNN).
+A complete end-to-end Machine Learning project that automatically collects datasets, trains an optimized image classification model, and performs real-time object recognition through a webcam.
 
-This project automatically collects images from the web, trains an optimized machine learning model, and performs live object recognition using a webcam.
+This project demonstrates the entire machine learning workflow:
 
----
-
-## 🚀 Features
-
-✅ Automatic dataset collection from Google and Bing
-
-✅ Duplicate and corrupted image removal
-
-✅ HOG (Histogram of Oriented Gradients) feature extraction
-
-✅ PCA for dimensionality reduction and faster inference
-
-✅ Optimized KNN classifier with Grid Search
-
-✅ Real-time webcam object recognition
-
-✅ Fully automated training pipeline
-
-✅ Supports multiple object categories
+**Data Collection → Data Cleaning → Feature Engineering → Model Optimization → Real-Time Deployment**
 
 ---
 
-## 🛠️ Technologies Used
+# ✨ Features
 
-* Python
-* OpenCV
-* Scikit-Learn
-* NumPy
-* scikit-image
-* PIL (Pillow)
-* ImageHash
-* iCrawler
+## 📥 Smart Dataset Collection
+
+Choose how you want to build your dataset:
+
+### Option 1 — Web Scraping
+
+Download images automatically from:
+
+* Google Images
+* Bing Images
+
+### Option 2 — Webcam Collection
+
+Capture your own training images using your webcam.
+
+### Option 3 — Hybrid Collection (Recommended)
+
+Combine:
+
+* Google Images
+* Bing Images
+* Webcam Images
+
+for maximum dataset diversity and improved model performance.
 
 ---
 
-## 📂 Project Structure
+## 🧹 Automatic Dataset Cleaning
+
+The system automatically:
+
+✅ Removes corrupted images
+
+✅ Detects and removes duplicate images
+
+✅ Organizes data into class folders
+
+---
+
+## 🧠 Machine Learning Pipeline
+
+The project uses traditional Computer Vision and Machine Learning techniques:
+
+### Feature Extraction
+
+Histogram of Oriented Gradients (HOG)
+
+Extracts:
+
+* Edges
+* Shapes
+* Object structure
+* Texture information
+
+while remaining robust to lighting changes.
+
+### Feature Scaling
+
+StandardScaler
+
+Normalizes features before training.
+
+### Dimensionality Reduction
+
+Principal Component Analysis (PCA)
+
+Benefits:
+
+* Faster training
+* Faster prediction
+* Reduced memory usage
+* Less noise
+
+The model automatically retains **95% of feature variance**.
+
+### Classification
+
+K-Nearest Neighbors (KNN)
+
+Optimized using GridSearchCV.
+
+---
+
+# 🔬 Model Optimization
+
+The training script automatically searches for the best parameters:
+
+```python
+parameters = {
+    "knn__n_neighbors": [3, 5, 7, 9, 11, 15, 21],
+    "knn__weights": ["distance"],
+    "knn__metric": ["cosine", "euclidean"]
+}
+```
+
+The best configuration is selected automatically using 5-Fold Cross Validation.
+
+---
+
+# 🎥 Real-Time Object Recognition
+
+After training, the system can recognize objects live through a webcam.
+
+### Displayed Information
+
+✅ Predicted Object
+
+✅ Confidence Score
+
+✅ FPS (Frames Per Second)
+
+✅ Top-3 Predictions
+
+✅ Unknown Object Detection
+
+---
+
+## Example Output
+
+```text
+Object: Bottle
+
+Confidence: 92.7%
+
+FPS: 28
+
+Top Predictions:
+
+🥇 Bottle (92.7%)
+🥈 Cup (4.2%)
+🥉 Can (2.1%)
+```
+
+---
+
+# 🚀 Project Workflow
+
+```text
+Dataset Collection
+        │
+        ▼
+Image Cleaning
+        │
+        ▼
+Feature Extraction (HOG)
+        │
+        ▼
+Feature Scaling
+        │
+        ▼
+PCA (95% Variance Retained)
+        │
+        ▼
+KNN Optimization (GridSearchCV)
+        │
+        ▼
+Model Evaluation
+        │
+        ▼
+Model Saving
+        │
+        ▼
+Real-Time Webcam Recognition
+```
+
+---
+
+# 📂 Project Structure
 
 ```text
 project/
-│
+
 ├── dataset/
-│   ├── cat/
-│   ├── dog/
 │   ├── bottle/
+│   ├── cat/
+│   ├── phone/
 │   └── ...
-│
+
 ├── collect_data.py
+
 ├── train_model.py
+
 ├── predict.py
-│
+
 ├── object_model.pkl
+
 ├── classes.pkl
-│
+
+├── model_info.txt
+
 └── README.md
 ```
 
 ---
 
-## 🔍 How It Works
+# ⚙️ Installation
 
-### 1️⃣ Dataset Collection
-
-The system automatically downloads images from Google and Bing using the provided object name.
-
-Example:
+## Clone Repository
 
 ```bash
-python collect_data.py
-```
+git clone https://github.com/Programmer05102/ML-Project
 
-Input:
-
-```text
-Enter object name: bottle
-```
-
-The script:
-
-* Downloads hundreds of images
-* Removes corrupted files
-* Removes duplicate images
-* Stores clean data inside the dataset folder
-
----
-
-### 2️⃣ Feature Extraction
-
-Instead of training directly on raw pixels, the project uses:
-
-**Histogram of Oriented Gradients (HOG)**
-
-HOG captures:
-
-* Edges
-* Shapes
-* Object structure
-
-while being more robust to lighting and background variations.
-
----
-
-### 3️⃣ Feature Optimization
-
-The extracted HOG features are processed using:
-
-**PCA (Principal Component Analysis)**
-
-Benefits:
-
-* Reduces feature dimensions
-* Removes noise
-* Improves training speed
-* Improves prediction speed
-* Reduces memory usage
-
----
-
-### 4️⃣ Model Training
-
-The classifier uses:
-
-**K-Nearest Neighbors (KNN)**
-
-GridSearchCV automatically searches for:
-
-* Best K value
-* Best distance metric
-* Best weighting strategy
-
-Example search space:
-
-```python
-n_neighbors = [1, 3, 5, 7, 9, 11, 15, 21, 31]
-
-weights = [
-    "uniform",
-    "distance"
-]
-
-metrics = [
-    "euclidean",
-    "manhattan",
-    "cosine"
-]
+cd ML-Project
 ```
 
 ---
 
-### 5️⃣ Real-Time Recognition
-
-After training:
-
-```bash
-python predict.py
-```
-
-The webcam starts automatically and predicts objects in real time.
-
-Press:
-
-```text
-Q
-```
-
-to quit.
-
----
-
-## ⚡ Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/yourusername/object-recognition-knn.git
-
-cd object-recognition-knn
-```
-
-### Install Dependencies
+## Install Dependencies
 
 ```bash
 pip install opencv-python
@@ -200,7 +235,7 @@ pip install imagehash
 pip install icrawler
 ```
 
-or
+Or install from requirements.txt:
 
 ```bash
 pip install -r requirements.txt
@@ -208,90 +243,219 @@ pip install -r requirements.txt
 
 ---
 
-## 📈 Machine Learning Pipeline
+# 📥 Creating a Dataset
+
+Run:
+
+```bash
+python collect_data.py
+```
+
+Enter object name:
 
 ```text
-Image
-   ↓
-Resize (128×128)
-   ↓
-Histogram Equalization
-   ↓
-HOG Feature Extraction
-   ↓
-StandardScaler
-   ↓
-PCA (95% Variance Retained)
-   ↓
-KNN Classifier
-   ↓
-Prediction
+Bottle
+```
+
+Choose:
+
+```text
+1. Google + Bing Scraper
+
+2. Webcam Collection
+
+3. Both (Recommended)
+```
+
+The dataset will automatically be stored inside:
+
+```text
+dataset/bottle/
 ```
 
 ---
 
-## 🎯 Example Use Cases
+# 🏋️ Training the Model
 
-* Educational AI Projects
-* Computer Vision Learning
-* Real-Time Object Detection Demos
-* Machine Learning Coursework
-* Image Classification Research
-* Rapid Prototyping
+Run:
+
+```bash
+python train_model.py
+```
+
+The training script automatically:
+
+* Loads all classes
+* Extracts HOG features
+* Applies StandardScaler
+* Applies PCA
+* Optimizes KNN
+* Evaluates performance
+* Saves the trained model
 
 ---
 
-## 📊 Performance
+## Generated Files
+
+### object_model.pkl
+
+Trained machine learning model.
+
+### classes.pkl
+
+Class labels.
+
+### model_info.txt
+
+Training summary containing:
+
+* Total Classes
+* Total Images
+* Training Samples
+* Testing Samples
+* Best Cross Validation Accuracy
+* Test Accuracy
+* Best Hyperparameters
+
+---
+
+# 🎯 Running Real-Time Recognition
+
+Run:
+
+```bash
+python predict.py
+```
+
+The webcam will open automatically.
+
+Press:
+
+```text
+Q
+```
+
+to quit.
+
+---
+
+# 📊 Evaluation Metrics
+
+The training script reports:
+
+### Cross Validation Accuracy
+
+Measures model performance during parameter tuning.
+
+### Test Accuracy
+
+Measures performance on unseen data.
+
+### Classification Report
+
+Includes:
+
+* Precision
+* Recall
+* F1 Score
+
+### Confusion Matrix
+
+Shows class-wise performance.
+
+---
+
+# 💡 Why HOG + PCA + KNN?
+
+This project intentionally uses classical Machine Learning instead of Deep Learning.
+
+Advantages:
+
+✅ Easier to understand
+
+✅ Faster training
+
+✅ Runs on low-end hardware
+
+✅ Great for educational projects
+
+✅ Demonstrates feature engineering concepts
+
+---
+
+# 📈 Expected Performance
 
 Performance depends on:
 
 * Dataset quality
 * Number of classes
-* Number of images per class
+* Dataset balance
+* Image diversity
 
 Typical results:
 
-| Classes | Accuracy |
-| ------- | -------- |
-| 5–10    | 85–95%   |
-| 10–20   | 75–90%   |
-| 20+     | 65–85%   |
+| Classes | Expected Accuracy |
+| ------- | ----------------- |
+| 5–10    | 85–95%            |
+| 10–20   | 75–90%            |
+| 20+     | 65–85%            |
 
 ---
 
-## 🔮 Future Improvements
+# 🔮 Future Improvements
 
-* CNN-based Deep Learning Models
+Potential upgrades:
+
+* CNN-Based Classification
 * MobileNet Integration
 * ResNet Integration
-* Object Detection with YOLO
+* YOLO Object Detection
 * Data Augmentation
 * GUI Application
-* Model Confidence Scores
+* Confidence Calibration
+* Export to Mobile Devices
 
 ---
 
-## 🤝 Contributing
+# 🎓 Educational Value
+
+This project demonstrates:
+
+* Data Collection
+* Data Cleaning
+* Feature Extraction
+* Dimensionality Reduction
+* Hyperparameter Optimization
+* Model Evaluation
+* Real-Time Inference
+* Computer Vision Fundamentals
+
+making it an excellent Machine Learning, Computer Vision, or Final Year Project portfolio piece.
+
+---
+
+# 🤝 Contributing
 
 Contributions are welcome.
 
 Feel free to:
 
 * Fork the repository
-* Create a feature branch
-* Submit a pull request
-* Open issues and suggestions
+* Create new features
+* Report bugs
+* Improve performance
+* Submit pull requests
 
 ---
 
-## 📜 License
+# 📜 License
 
-This project is open-source and available under the MIT License.
+This project is licensed under the MIT License.
 
 ---
 
-## ⭐ Support
+# ⭐ Support
 
-If you found this project useful, consider giving it a ⭐ on GitHub.
+If you found this project useful, consider giving it a star on GitHub.
 
 It helps others discover the project and motivates future improvements.
