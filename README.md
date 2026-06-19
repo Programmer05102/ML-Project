@@ -17,9 +17,8 @@ Choose how you want to build your dataset:
 ### Option 1 — Web Scraping
 
 Download images automatically from:
-
-* Google Images
-* Bing Images
+- Google Images
+- Bing Images
 
 ### Option 2 — Webcam Collection
 
@@ -28,10 +27,9 @@ Capture your own training images using your webcam.
 ### Option 3 — Hybrid Collection (Recommended)
 
 Combine:
-
-* Google Images
-* Bing Images
-* Webcam Images
+- Google Images
+- Bing Images
+- Webcam Images
 
 for maximum dataset diversity and improved model performance.
 
@@ -41,11 +39,9 @@ for maximum dataset diversity and improved model performance.
 
 The system automatically:
 
-✅ Removes corrupted images
-
-✅ Detects and removes duplicate images
-
-✅ Organizes data into class folders
+- Removes corrupted images  
+- Detects and removes duplicate images  
+- Organizes data into class folders  
 
 ---
 
@@ -55,47 +51,44 @@ The project uses traditional Computer Vision and Machine Learning techniques:
 
 ### Feature Extraction
 
-Histogram of Oriented Gradients (HOG)
-
-Extracts:
-
-* Edges
-* Shapes
-* Object structure
-* Texture information
+**Histogram of Oriented Gradients (HOG)** extracts:
+- Edges  
+- Shapes  
+- Object structure  
+- Texture information  
 
 while remaining robust to lighting changes.
 
+---
+
 ### Feature Scaling
 
-StandardScaler
+**StandardScaler** normalizes features before training.
 
-Normalizes features before training.
+---
 
 ### Dimensionality Reduction
 
-Principal Component Analysis (PCA)
+**Principal Component Analysis (PCA)** improves efficiency:
 
-Benefits:
+- Faster training  
+- Faster prediction  
+- Reduced memory usage  
+- Less noise  
 
-* Faster training
-* Faster prediction
-* Reduced memory usage
-* Less noise
+The model retains **95% of feature variance**.
 
-The model automatically retains **95% of feature variance**.
+---
 
 ### Classification
 
-K-Nearest Neighbors (KNN)
-
-Optimized using GridSearchCV.
+**K-Nearest Neighbors (KNN)** optimized using GridSearchCV.
 
 ---
 
 # 🔬 Model Optimization
 
-The training script automatically searches for the best parameters:
+The system automatically searches for the best hyperparameters:
 
 ```python
 parameters = {
@@ -103,27 +96,23 @@ parameters = {
     "knn__weights": ["distance"],
     "knn__metric": ["cosine", "euclidean"]
 }
-```
+````
 
-The best configuration is selected automatically using 5-Fold Cross Validation.
+Best configuration is selected using **5-Fold Cross Validation**.
 
 ---
 
 # 🎥 Real-Time Object Recognition
 
-After training, the system can recognize objects live through a webcam.
+After training, the system performs live object recognition via webcam.
 
-### Displayed Information
+## Displayed Information
 
-✅ Predicted Object
-
-✅ Confidence Score
-
-✅ FPS (Frames Per Second)
-
-✅ Top-3 Predictions
-
-✅ Unknown Object Detection
+* Predicted Object
+* Confidence Score
+* FPS (Frames Per Second)
+* Top-3 Predictions
+* Unknown Object Detection
 
 ---
 
@@ -189,17 +178,11 @@ project/
 │   └── ...
 
 ├── collect_data.py
-
 ├── train_model.py
-
 ├── predict.py
-
 ├── object_model.pkl
-
 ├── classes.pkl
-
 ├── model_info.txt
-
 └── README.md
 ```
 
@@ -211,7 +194,6 @@ project/
 
 ```bash
 git clone https://github.com/Programmer05102/ML-Project
-
 cd ML-Project
 ```
 
@@ -220,22 +202,14 @@ cd ML-Project
 ## Install Dependencies
 
 ```bash
-pip install opencv-python
-
-pip install numpy
-
-pip install scikit-learn
-
-pip install scikit-image
-
-pip install pillow
-
-pip install imagehash
-
+pip install ImageHash
 pip install icrawler
+pip install opencv-python
+pip install scikit-learn
+pip install scikit-image
 ```
 
-Or install from requirements.txt:
+Or install all at once:
 
 ```bash
 pip install -r requirements.txt
@@ -244,8 +218,6 @@ pip install -r requirements.txt
 ---
 
 # 📥 Creating a Dataset
-
-Run:
 
 ```bash
 python collect_data.py
@@ -257,17 +229,15 @@ Enter object name:
 Bottle
 ```
 
-Choose:
+Choose dataset source:
 
 ```text
-1. Google + Bing Scraper
-
+1. Google + Baidu + Bing Scraper
 2. Webcam Collection
-
 3. Both (Recommended)
 ```
 
-The dataset will automatically be stored inside:
+Dataset will be stored in:
 
 ```text
 dataset/bottle/
@@ -277,13 +247,11 @@ dataset/bottle/
 
 # 🏋️ Training the Model
 
-Run:
-
 ```bash
 python train_model.py
 ```
 
-The training script automatically:
+The script automatically:
 
 * Loads all classes
 * Extracts HOG features
@@ -307,27 +275,22 @@ Class labels.
 
 ### model_info.txt
 
-Training summary containing:
+Training summary including:
 
 * Total Classes
 * Total Images
 * Training Samples
 * Testing Samples
-* Best Cross Validation Accuracy
-* Test Accuracy
+* Best Accuracy
 * Best Hyperparameters
 
 ---
 
 # 🎯 Running Real-Time Recognition
 
-Run:
-
 ```bash
 python predict.py
 ```
-
-The webcam will open automatically.
 
 Press:
 
@@ -341,79 +304,45 @@ to quit.
 
 # 📊 Evaluation Metrics
 
-The training script reports:
-
-### Cross Validation Accuracy
-
-Measures model performance during parameter tuning.
-
-### Test Accuracy
-
-Measures performance on unseen data.
-
-### Classification Report
-
-Includes:
-
-* Precision
-* Recall
-* F1 Score
-
-### Confusion Matrix
-
-Shows class-wise performance.
+* Cross Validation Accuracy
+* Test Accuracy
+* Precision / Recall / F1-score
+* Confusion Matrix
 
 ---
 
 # 💡 Why HOG + PCA + KNN?
 
-This project intentionally uses classical Machine Learning instead of Deep Learning.
+This project intentionally avoids Deep Learning to focus on fundamentals.
 
 Advantages:
 
-✅ Easier to understand
-
-✅ Faster training
-
-✅ Runs on low-end hardware
-
-✅ Great for educational projects
-
-✅ Demonstrates feature engineering concepts
+* Easy to understand
+* Fast training
+* Works on low-end hardware
+* Strong for learning ML concepts
+* Great academic/project value
 
 ---
 
 # 📈 Expected Performance
 
-Performance depends on:
-
-* Dataset quality
-* Number of classes
-* Dataset balance
-* Image diversity
-
-Typical results:
-
-| Classes | Expected Accuracy |
-| ------- | ----------------- |
-| 5–10    | 85–95%            |
-| 10–20   | 75–90%            |
-| 20+     | 65–85%            |
+| Classes | Accuracy |
+| ------- | -------- |
+| 5–10    | 85–95%   |
+| 10–20   | 75–90%   |
+| 20+     | 65–85%   |
 
 ---
 
 # 🔮 Future Improvements
 
-Potential upgrades:
-
 * CNN-Based Classification
-* MobileNet Integration
-* ResNet Integration
+* MobileNet / ResNet Integration
 * YOLO Object Detection
 * Data Augmentation
 * GUI Application
-* Confidence Calibration
-* Export to Mobile Devices
+* Mobile Deployment
 
 ---
 
@@ -423,26 +352,19 @@ This project demonstrates:
 
 * Data Collection
 * Data Cleaning
-* Feature Extraction
+* Feature Engineering
 * Dimensionality Reduction
-* Hyperparameter Optimization
+* Hyperparameter Tuning
 * Model Evaluation
 * Real-Time Inference
-* Computer Vision Fundamentals
-
-making it an excellent Machine Learning, Computer Vision, or Final Year Project portfolio piece.
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
-
-Feel free to:
-
 * Fork the repository
-* Create new features
-* Report bugs
+* Add features
+* Report issues
 * Improve performance
 * Submit pull requests
 
@@ -456,6 +378,4 @@ This project is licensed under the MIT License.
 
 # ⭐ Support
 
-If you found this project useful, consider giving it a star on GitHub.
-
-It helps others discover the project and motivates future improvements.
+If you find this useful, consider starring the repository.
