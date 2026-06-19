@@ -18,6 +18,7 @@ Choose how you want to build your dataset:
 
 Download images automatically from:
 - Google Images
+- Baidu Images
 - Bing Images
 
 ### Option 2 — Webcam Collection
@@ -28,6 +29,7 @@ Capture your own training images using your webcam.
 
 Combine:
 - Google Images
+- Baidu Images
 - Bing Images
 - Webcam Images
 
