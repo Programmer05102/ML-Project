@@ -399,3 +399,4 @@ This project is open-source and available under the MIT License.
 # 👨‍💻 Author
 
 Developed as a Machine Learning and Computer Vision project using Python, OpenCV, Scikit-Learn, HOG, PCA, and Optimized KNN.
+If you find this useful, consider starring the repository.
