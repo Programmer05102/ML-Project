@@ -1,168 +1,77 @@
-# 🧠 AI Object Recognition System using KNN, HOG & PCA
+# 🧠 AI Object Recognition System using HOG, PCA & Optimized KNN
 
-A complete end-to-end Machine Learning project that automatically collects datasets, trains an optimized image classification model, and performs real-time object recognition through a webcam.
+A complete end-to-end Computer Vision and Machine Learning project that automatically collects image datasets, trains an optimized object recognition model, and performs real-time object classification through a webcam.
 
-This project demonstrates the entire machine learning workflow:
+The project demonstrates the entire machine learning workflow:
 
-**Data Collection → Data Cleaning → Feature Engineering → Model Optimization → Real-Time Deployment**
-
----
-
-# ✨ Features
-
-## 📥 Smart Dataset Collection
-
-Choose how you want to build your dataset:
-
-### Option 1 — Web Scraping
-
-Download images automatically from:
-- Google Images
-- Bing Images
-
-### Option 2 — Webcam Collection
-
-Capture your own training images using your webcam.
-
-### Option 3 — Hybrid Collection (Recommended)
-
-Combine:
-- Google Images
-- Bing Images
-- Webcam Images
-
-for maximum dataset diversity and improved model performance.
+**Data Collection → Data Cleaning → Feature Engineering → Dimensionality Reduction → Hyperparameter Optimization → Real-Time Object Recognition**
 
 ---
 
-## 🧹 Automatic Dataset Cleaning
+# 🚀 Features
 
-The system automatically:
+### 📥 Automated Dataset Collection
 
-- Removes corrupted images  
-- Detects and removes duplicate images  
-- Organizes data into class folders  
+* Download images automatically from:
 
----
+  * Google Images
+  * Bing Images
+  * Baidu Images
+* Collect custom images directly from webcam
+* Combine web scraping and webcam collection for better datasets
 
-## 🧠 Machine Learning Pipeline
+### 🧹 Dataset Cleaning
 
-The project uses traditional Computer Vision and Machine Learning techniques:
+* Corrupted image detection and removal
+* Duplicate image detection using Perceptual Hashing (pHash)
+* Automatic dataset validation
 
-### Feature Extraction
+### 🎯 Feature Engineering
 
-**Histogram of Oriented Gradients (HOG)** extracts:
-- Edges  
-- Shapes  
-- Object structure  
-- Texture information  
+* Image resizing and normalization
+* Histogram Equalization
+* HOG (Histogram of Oriented Gradients) feature extraction
+* Lightweight and fast feature computation
 
-while remaining robust to lighting changes.
+### 📉 Dimensionality Reduction
 
----
+* Principal Component Analysis (PCA)
+* Reduces feature dimensionality
+* Faster training and prediction
+* Lower memory consumption
 
-### Feature Scaling
+### 🤖 Optimized KNN Classifier
 
-**StandardScaler** normalizes features before training.
+* GridSearchCV hyperparameter optimization
+* Automatic selection of:
 
----
+  * Number of Neighbors (K)
+  * Distance Metric
+  * Weighting Strategy
+* Cosine similarity based classification
 
-### Dimensionality Reduction
+### 🎥 Real-Time Object Recognition
 
-**Principal Component Analysis (PCA)** improves efficiency:
+* Webcam-based prediction
+* FPS display
+* Top-3 predictions display
+* Confidence score display
+* Distance-based Unknown Object Detection
+* ROI (Region of Interest) object recognition
 
-- Faster training  
-- Faster prediction  
-- Reduced memory usage  
-- Less noise  
+### 🚫 Unknown Object Detection
 
-The model retains **95% of feature variance**.
+Unlike traditional KNN implementations that always predict a known class, this system measures the nearest-neighbor distance and rejects objects that are too different from the training dataset.
 
----
+Example:
 
-### Classification
+Known Object:
+Chair → Chair
 
-**K-Nearest Neighbors (KNN)** optimized using GridSearchCV.
+Unknown Object:
+Mobile Phone → Unknown
 
----
-
-# 🔬 Model Optimization
-
-The system automatically searches for the best hyperparameters:
-
-```python
-parameters = {
-    "knn__n_neighbors": [3, 5, 7, 9, 11, 15, 21],
-    "knn__weights": ["distance"],
-    "knn__metric": ["cosine", "euclidean"]
-}
-````
-
-Best configuration is selected using **5-Fold Cross Validation**.
-
----
-
-# 🎥 Real-Time Object Recognition
-
-After training, the system performs live object recognition via webcam.
-
-## Displayed Information
-
-* Predicted Object
-* Confidence Score
-* FPS (Frames Per Second)
-* Top-3 Predictions
-* Unknown Object Detection
-
----
-
-## Example Output
-
-```text
-Object: Bottle
-
-Confidence: 92.7%
-
-FPS: 28
-
-Top Predictions:
-
-🥇 Bottle (92.7%)
-🥈 Cup (4.2%)
-🥉 Can (2.1%)
-```
-
----
-
-# 🚀 Project Workflow
-
-```text
-Dataset Collection
-        │
-        ▼
-Image Cleaning
-        │
-        ▼
-Feature Extraction (HOG)
-        │
-        ▼
-Feature Scaling
-        │
-        ▼
-PCA (95% Variance Retained)
-        │
-        ▼
-KNN Optimization (GridSearchCV)
-        │
-        ▼
-Model Evaluation
-        │
-        ▼
-Model Saving
-        │
-        ▼
-Real-Time Webcam Recognition
-```
+This makes the system significantly more practical for real-world usage.
 
 ---
 
@@ -170,46 +79,91 @@ Real-Time Webcam Recognition
 
 ```text
 project/
-
+│
 ├── dataset/
-│   ├── bottle/
-│   ├── cat/
-│   ├── phone/
-│   └── ...
-
+│   ├── chair/
+│   ├── table/
+│   ├── fridge/
+│   ├── tv/
+│   └── almirah/
+│
 ├── collect_data.py
 ├── train_model.py
 ├── predict.py
+│
 ├── object_model.pkl
 ├── classes.pkl
 ├── model_info.txt
+│
+├── requirements.txt
 └── README.md
 ```
 
 ---
 
-# ⚙️ Installation
+# ⚙️ Technologies Used
 
-## Clone Repository
+### Programming Language
 
-```bash
-git clone https://github.com/Programmer05102/ML-Project
-cd ML-Project
-```
+* Python 3
+
+### Computer Vision
+
+* OpenCV
+
+### Machine Learning
+
+* Scikit-Learn
+
+### Feature Extraction
+
+* Scikit-Image (HOG)
+
+### Dataset Collection
+
+* iCrawler
+
+### Image Processing
+
+* ImageHash
+
+### Numerical Computing
+
+* NumPy
 
 ---
 
-## Install Dependencies
+# 🛠 Installation
+
+Clone the repository:
 
 ```bash
-pip install ImageHash
-pip install icrawler
-pip install opencv-python
-pip install scikit-learn
-pip install scikit-image
+git clone https://github.com/Programmer05102/ML-Project.git
+
+cd ML-Project
 ```
 
-Or install all at once:
+Create virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate virtual environment:
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Linux/Mac:
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -217,165 +171,231 @@ pip install -r requirements.txt
 
 ---
 
-# 📥 Creating a Dataset
+# 📥 Step 1 – Collect Dataset
+
+Run:
 
 ```bash
 python collect_data.py
 ```
 
-Enter object name:
+Example:
 
 ```text
-Bottle
-```
+Enter object name: Chair
 
-Choose dataset source:
+Select Data Collection Method
 
-```text
-1. Google + Baidu + Bing Scraper
+1. Google + Bing + Baidu Scraper
 2. Webcam Collection
 3. Both (Recommended)
 ```
 
-Dataset will be stored in:
+Recommended dataset size:
 
-```text
-dataset/bottle/
-```
+| Object Count | Accuracy Potential |
+| ------------ | ------------------ |
+| 100 Images   | Low                |
+| 300 Images   | Good               |
+| 500 Images   | Very Good          |
+| 1000+ Images | Excellent          |
 
 ---
 
-# 🏋️ Training the Model
+# 🧠 Step 2 – Train Model
+
+Run:
 
 ```bash
 python train_model.py
 ```
 
-The script automatically:
+Training pipeline:
 
-* Loads all classes
-* Extracts HOG features
-* Applies StandardScaler
-* Applies PCA
-* Optimizes KNN
-* Evaluates performance
-* Saves the trained model
+```text
+Images
+   ↓
+Resize
+   ↓
+Histogram Equalization
+   ↓
+HOG Features
+   ↓
+StandardScaler
+   ↓
+PCA
+   ↓
+KNN
+```
+
+The system automatically:
+
+* Loads dataset
+* Extracts features
+* Splits train/test data
+* Performs Grid Search
+* Evaluates accuracy
+* Saves trained model
+
+Generated files:
+
+```text
+object_model.pkl
+classes.pkl
+model_info.txt
+```
 
 ---
 
-## Generated Files
+# 🎥 Step 3 – Real-Time Prediction
 
-### object_model.pkl
-
-Trained machine learning model.
-
-### classes.pkl
-
-Class labels.
-
-### model_info.txt
-
-Training summary including:
-
-* Total Classes
-* Total Images
-* Training Samples
-* Testing Samples
-* Best Accuracy
-* Best Hyperparameters
-
----
-
-# 🎯 Running Real-Time Recognition
+Run:
 
 ```bash
 python predict.py
 ```
 
-Press:
+The webcam opens and displays:
 
 ```text
-Q
+Object: Chair
+Confidence: 91.4%
+Distance: 0.42
+FPS: 24
+
+Top Predictions:
+
+1. Chair (91.4%)
+2. Table (6.3%)
+3. TV (2.3%)
 ```
 
-to quit.
+---
+
+# 🎯 Region of Interest (ROI)
+
+To improve recognition accuracy, prediction is performed only on the center ROI instead of the entire webcam frame.
+
+Without ROI:
+
+```text
+Face + Wall + Fan + Object
+```
+
+With ROI:
+
+```text
+Object Only
+```
+
+Benefits:
+
+* Better classification accuracy
+* Less background noise
+* More stable predictions
+* Improved Unknown detection
 
 ---
 
-# 📊 Evaluation Metrics
+# 📊 Example Training Results
 
-* Cross Validation Accuracy
-* Test Accuracy
-* Precision / Recall / F1-score
-* Confusion Matrix
+Dataset:
 
----
+```text
+Almirah : 200 images
+Chair   : 200 images
+Fridge  : 150 images
+Table   : 100 images
+TV      : 150 images
+```
 
-# 💡 Why HOG + PCA + KNN?
+Results:
 
-This project intentionally avoids Deep Learning to focus on fundamentals.
+```text
+Cross Validation Accuracy : 94.38%
 
-Advantages:
+Test Accuracy : 95.62%
+```
 
-* Easy to understand
-* Fast training
-* Works on low-end hardware
-* Strong for learning ML concepts
-* Great academic/project value
+Confusion Matrix:
 
----
-
-# 📈 Expected Performance
-
-| Classes | Accuracy |
-| ------- | -------- |
-| 5–10    | 85–95%   |
-| 10–20   | 75–90%   |
-| 20+     | 65–85%   |
+```text
+Accurate separation between all 5 object classes.
+```
 
 ---
 
-# 🔮 Future Improvements
+# 🔬 Machine Learning Concepts Used
 
-* CNN-Based Classification
-* MobileNet / ResNet Integration
-* YOLO Object Detection
+This project demonstrates:
+
+* Supervised Learning
+* Image Classification
+* Feature Extraction
+* HOG Features
+* PCA
+* K-Nearest Neighbors
+* Hyperparameter Tuning
+* Cross Validation
+* Model Evaluation
+* Real-Time Computer Vision
+* Unknown Class Detection
+
+---
+
+# 💡 Future Improvements
+
+Possible upgrades:
+
+### Deep Learning
+
+* CNN
+* MobileNet
+* EfficientNet
+* ResNet
+
+### Object Detection
+
+* YOLOv8
+* SSD
+* Faster R-CNN
+
+### Deployment
+
+* Flask API
+* Streamlit Web App
+* Android Application
+* Raspberry Pi Deployment
+
+### Dataset Enhancements
+
+* Automatic Background Removal
 * Data Augmentation
-* GUI Application
-* Mobile Deployment
+* Object Segmentation
 
 ---
 
 # 🎓 Educational Value
 
-This project demonstrates:
+This project is ideal for:
 
-* Data Collection
-* Data Cleaning
-* Feature Engineering
-* Dimensionality Reduction
-* Hyperparameter Tuning
-* Model Evaluation
-* Real-Time Inference
+* Machine Learning Beginners
+* Computer Vision Projects
+* Final Year Projects
+* BSCS Students
+* AI Portfolio Projects
+* Internship Demonstrations
 
----
-
-# 🤝 Contributing
-
-* Fork the repository
-* Add features
-* Report issues
-* Improve performance
-* Submit pull requests
+It showcases the complete ML lifecycle from data collection to real-time deployment.
 
 ---
 
 # 📜 License
 
-This project is licensed under the MIT License.
+This project is open-source and available under the MIT License.
 
 ---
 
-# ⭐ Support
+# 👨‍💻 Author
 
-If you find this useful, consider starring the repository.
+Developed as a Machine Learning and Computer Vision project using Python, OpenCV, Scikit-Learn, HOG, PCA, and Optimized KNN.
