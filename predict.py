@@ -8,7 +8,7 @@ from skimage.feature import hog
 IMG_SIZE = (64, 64)
 
 # Tune this after testing
-UNKNOWN_DISTANCE_THRESHOLD = 1.0
+UNKNOWN_DISTANCE_THRESHOLD = 0.5
 
 
 def extract_features(image):
@@ -54,6 +54,19 @@ cap = cv2.VideoCapture(0)
 
 prev_time = time.time()
 
+window_name = "AI Object Recognition (Press Q to Quit)"
+
+cv2.namedWindow(
+    window_name,
+    cv2.WINDOW_NORMAL
+)
+
+cv2.setWindowProperty(
+    window_name,
+    cv2.WND_PROP_FULLSCREEN,
+    cv2.WINDOW_FULLSCREEN
+)
+
 while True:
 
     ret, frame = cap.read()
@@ -61,7 +74,21 @@ while True:
     if not ret:
         break
 
-    feature = extract_features(frame)
+    # Get frame dimensions
+    h, w = frame.shape[:2]
+
+    # Center ROI (50% of frame)
+    x1 = int(w * 0.25)
+    y1 = int(h * 0.25)
+
+    x2 = int(w * 0.75)
+    y2 = int(h * 0.75)
+
+    # Crop object region
+    roi = frame[y1:y2, x1:x2]
+
+    # Extract features from ROI only
+    feature = extract_features(roi)
 
     feature = feature.reshape(1, -1)
 
@@ -216,8 +243,17 @@ while True:
 
         y += 35
 
+        cv2.rectangle(
+        frame,
+        (x1, y1),
+        (x2, y2),
+        (0, 255, 0),
+        2
+        )
+
+
     cv2.imshow(
-        "AI Object Recognition (Press Q to Quit)",
+        window_name,
         frame
     )
 
