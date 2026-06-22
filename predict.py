@@ -8,7 +8,8 @@ from skimage.feature import hog
 IMG_SIZE = (64, 64)
 
 # Tune this after testing
-UNKNOWN_DISTANCE_THRESHOLD = 0.5
+UNKNOWN_DISTANCE_THRESHOLD = 0.72
+CONFIDENCE_THRESHOLD = 75
 
 
 def extract_features(image):
@@ -79,13 +80,18 @@ while True:
 
     # Center ROI (50% of frame)
     x1 = int(w * 0.25)
-    y1 = int(h * 0.25)
+    y1 = int(h * 0.1)
 
     x2 = int(w * 0.75)
-    y2 = int(h * 0.75)
+    y2 = int(h * 0.9)
 
     # Crop object region
     roi = frame[y1:y2, x1:x2]
+
+    cv2.imshow(
+        "ROI",
+        roi
+    )
 
     # Extract features from ROI only
     feature = extract_features(roi)
@@ -118,8 +124,17 @@ while True:
 
     nearest_distance = distances[0][0]
 
+    # print(
+    #     f"Prediction={prediction}",
+    #     f"Confidence={confidence:.2f}",
+    #     f"Distance={nearest_distance:.4f}"
+    # )
+
     # Unknown Detection
-    if nearest_distance > UNKNOWN_DISTANCE_THRESHOLD:
+    if (
+        nearest_distance > UNKNOWN_DISTANCE_THRESHOLD
+        or confidence < CONFIDENCE_THRESHOLD
+    ):
 
         prediction = "Unknown"
 
@@ -243,13 +258,20 @@ while True:
 
         y += 35
 
-        cv2.rectangle(
-        frame,
-        (x1, y1),
-        (x2, y2),
-        (0, 255, 0),
-        2
-        )
+    box_color = (
+    (0, 255, 0)
+    if prediction != "Unknown"
+    else
+    (0, 0, 255)
+)
+
+    cv2.rectangle(
+    frame,
+    (x1, y1),
+    (x2, y2),
+    box_color,
+    2
+    )
 
 
     cv2.imshow(
